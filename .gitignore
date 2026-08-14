@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.pyc
+.venv*/
+.env
+
+# Logs
+logs/
+*.log
+
+# Data and generated outputs
+data/*
+!data/.gitkeep
+generated_data/
+outputs/
+
+# Checkpoints and model weights
+checkpoints/*
+!checkpoints/.gitkeep
+pretrained_models/
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.bin
+
+# Third-party repositories
+third_party/*
+!third_party/.gitkeep
+
+# Videos
+*.mp4
+*.avi
+*.mov
+*.webm
+
+# System files
+.DS_Store
+Thumbs.db

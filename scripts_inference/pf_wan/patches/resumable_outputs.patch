@@ -1,0 +1,22 @@
+--- a/pf_wan/project/engines/generate_i2v.py
++++ b/pf_wan/project/engines/generate_i2v.py
+@@ -58,4 +58,2 @@
+-        from datetime import datetime
+-        now = datetime.now().strftime("%Y%m%d_%H%M%S")
+-        local_dir = os.path.join(self.config.output_dir, self.config.proj_name, now)
++        local_dir = os.path.join(self.config.output_dir, self.config.proj_name)
+         os.makedirs(local_dir, exist_ok=True)
+@@ -87,6 +85,12 @@ class GenerateI2V(DefaultEngine):
+                 items = line.strip().split('@@')
+                 text = items[0]
+                 img_paths = items[1].strip()
++                image_id = os.path.splitext(os.path.basename(img_paths))[0] or f"{index:03d}"
++                local_path = os.path.join(local_dir, f"{image_id}.mp4")
++                if os.path.isfile(local_path):
++                    if comm.get_local_rank() == 0:
++                        logger.info(f"skip existing video: {local_path}")
++                    continue
+                 positive_prompts.append(text.strip())
+                 filenames.append(img_paths)
+-                indices.append(index)
++                indices.append(len(indices))
