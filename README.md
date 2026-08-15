@@ -69,7 +69,41 @@ cd VideoGen
 mkdir -p third_party checkpoints data logs
 ```
 
-### 2. Dataset layout
+### 2. Environment setup
+
+**Common requirements** (all models):
+
+```bash
+# Python 3.10+ recommended
+pip install opencv-python-headless numpy Pillow
+pip install -U "huggingface_hub[cli]"
+ffmpeg -version   # ensure ffmpeg is available
+```
+
+**Per-model environments** — use a separate venv/conda per model to avoid dependency conflicts:
+
+| Model | Environment |
+| --- | --- |
+| Wan2.2 | `pip install -r third_party/Wan2.2/requirements.txt` |
+| Cosmos-Predict2.5 | Follow `third_party/cosmos-predict2.5` upstream |
+| Cosmos3 (Diffusers) | `pip install --extra-index-url https://download.pytorch.org/whl/cu128 -r envs/cosmos3_diffusers.txt` |
+| Cosmos3 (framework) | `bash scripts_inference/setup_cosmos3.sh` |
+| CogVideoX | `pip install -r third_party/CogVideo/requirements.txt` |
+| WoW | Follow `third_party/WoW` upstream |
+| GigaWorld | Follow `third_party/GigaWorld` upstream |
+| LingBot-Video | `pip install -r envs/lingbot_video.txt && pip install -e third_party/lingbot-video` |
+| PF_Wan | `pip install -r envs/pf_wan.txt` (Python 3.11, PyTorch 2.7.1, CUDA 12.8, FlashAttn 2.8.3) |
+| HunyuanVideo 1.5 | `pip install -r third_party/HunyuanVideo-1.5/requirements.txt` + matching flash-attn wheel |
+| LongCat-Video | `pip install -r third_party/LongCat-Video/requirements.txt` + matching flash-attn wheel |
+| SVD-xt | `pip install diffusers transformers accelerate` (standard diffusers stack) |
+| API models | `pip install openai dashscope requests` |
+
+**Notes:**
+- Flash-attn: install with `pip install flash-attn --no-build-isolation` after torch is available.
+- Proxy: if behind a firewall, set `http_proxy` / `https_proxy` and `HF_TOKEN` for model downloads.
+- GLIBC: on GLIBC 2.31 hosts, use compatible manylinux flash-attn wheels (2.32+ wheels won't load).
+
+### 3. Dataset layout
 
 Place datasets under `data/<dataset>/` with a `summary.json`:
 
