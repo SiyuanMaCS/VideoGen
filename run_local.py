@@ -237,7 +237,24 @@ def build_generator(args):
             cache_dir=args.abot_cache_dir if args.abot_cache_dir else None,
             no_tiled=args.abot_no_tiled,
         )
+    if args.model == "svd":
+        from inference.svd_generator import SVDGenerator
+        return SVDGenerator(checkpoint_dir=args.checkpoint_folder, gpu=args.gpu,
+                            num_frames=args.svd_num_frames, fps=args.svd_fps,
+                            motion_bucket_id=args.svd_motion_bucket_id)
 
+    if args.model == "hunyuan":
+        from inference.hunyuan_generator import HunyuanGenerator
+        return HunyuanGenerator(checkpoint_dir=args.checkpoint_folder, gpu=args.gpu,
+                                resolution=args.hunyuan_resolution, num_inference_steps=args.hunyuan_steps,
+                                guidance_scale=args.hunyuan_cfg, video_length=args.hunyuan_video_length)
+
+    if args.model == "longcat":
+        from inference.longcat_generator import LongCatGenerator
+        return LongCatGenerator(checkpoint_dir=args.checkpoint_folder, gpu=args.gpu,
+                                resolution=args.longcat_resolution, num_frames=args.longcat_num_frames,
+                                num_inference_steps=args.longcat_steps, guidance_scale=args.longcat_cfg)
+        
     raise ValueError(f"Unsupported model: {args.model}")
 
 
@@ -501,7 +518,7 @@ def run_one_task(gen, task_info, args):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--model", type=str, required=True, choices=["wow", "cosmos", "cosmos3", "cogvideo", "gigaworld", "wan22", "abot_physworld"])
+    parser.add_argument("--model", type=str, required=True, choices=["wow", "cosmos", "cosmos3", "cogvideo", "gigaworld", "wan22", "abot_physworld","svd", "hunyuan", "longcat"])
     parser.add_argument("--gt_root", type=str, required=True)
     parser.add_argument("--pred_root", type=str, required=True)
     parser.add_argument("--n_attempts", type=int, default=1)
@@ -599,6 +616,17 @@ def main():
     parser.add_argument("--abot_batch_size", type=int, default=1,
                     help="How many samples to process per ABot batch call. "
                          "1 means save each sample immediately; larger values reduce init overhead.")
+    parser.add_argument("--svd_num_frames", type=int, default=25)
+    parser.add_argument("--svd_fps", type=int, default=7)
+    parser.add_argument("--svd_motion_bucket_id", type=int, default=127)
+    parser.add_argument("--hunyuan_resolution", type=str, default="480p")
+    parser.add_argument("--hunyuan_steps", type=int, default=12)
+    parser.add_argument("--hunyuan_cfg", type=float, default=1.0)
+    parser.add_argument("--hunyuan_video_length", type=int, default=121)
+    parser.add_argument("--longcat_resolution", type=str, default="480p")
+    parser.add_argument("--longcat_num_frames", type=int, default=93)
+    parser.add_argument("--longcat_steps", type=int, default=50)
+    parser.add_argument("--longcat_cfg", type=float, default=4.0)
 
     args = parser.parse_args()
 
