@@ -27,6 +27,7 @@ PYTHON_BIN=${PYTHON_BIN:-python}
 
 GIGAWORLD_ROOT=${GIGAWORLD_ROOT:-"${THIRD_PARTY_ROOT}/GigaWorld"}
 GIGAWORLD_CKPT=${GIGAWORLD_CKPT:-"${CHECKPOINT_ROOT}/GigaWorld/GigaWorld-0-Video-GR1-2b"}
+GIGAWORLD_EXTRA_ARGS=${GIGAWORLD_EXTRA_ARGS:-""}
 
 GT_JSON="${DATA_ROOT}/${DATASET}/summary.json"
 PRED_ROOT="${DATA_ROOT}/${DATASET}/generated_data/${TEST_NAME}"
@@ -60,6 +61,7 @@ echo "Task list    : ${GT_JSON}"
 echo "Pred root    : ${PRED_ROOT}"
 echo "GigaWorld root: ${GIGAWORLD_ROOT}"
 echo "Checkpoint   : ${GIGAWORLD_CKPT}"
+echo "Extra args   : ${GIGAWORLD_EXTRA_ARGS}"
 echo "Processes    : ${N_PROC}"
 echo "GPU ids      : ${GPU_IDS}"
 echo "Attempts     : ${N_ATTEMPTS}"
@@ -80,6 +82,7 @@ for ((RANK=0; RANK<N_PROC; RANK++)); do
             --pred_root "${PRED_ROOT}" \
             --checkpoint_folder "${GIGAWORLD_CKPT}" \
             --gigaworld_root "${GIGAWORLD_ROOT}" \
+            --gigaworld_extra_args "${GIGAWORLD_EXTRA_ARGS}" \
             --n_attempts "${N_ATTEMPTS}" \
             --rank "${RANK}" \
             --world_size "${N_PROC}" \

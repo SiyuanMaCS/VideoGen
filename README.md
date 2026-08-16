@@ -84,13 +84,13 @@ ffmpeg -version   # ensure ffmpeg is available
 
 | Model | Environment |
 | --- | --- |
-| Wan2.2 | `pip install -r third_party/Wan2.2/requirements.txt` |
+| Wan2.2 | `pip install -r envs/wan22.txt` |
 | Cosmos-Predict2.5 | Follow `third_party/cosmos-predict2.5` upstream |
 | Cosmos3 (Diffusers) | `pip install --extra-index-url https://download.pytorch.org/whl/cu128 -r envs/cosmos3_diffusers.txt` |
 | Cosmos3 (framework) | `bash scripts_inference/setup_cosmos3.sh` |
-| CogVideoX | `pip install -r third_party/CogVideo/requirements.txt` |
-| WoW | Follow `third_party/WoW` upstream |
-| GigaWorld | Follow `third_party/GigaWorld` upstream |
+| CogVideoX | `pip install -r envs/cogvideo.txt` |
+| WoW | `pip install -r envs/wow.txt` |
+| GigaWorld | `pip install -r envs/gigaworld.txt` |
 | LingBot-Video | `pip install -r envs/lingbot_video.txt && pip install -e third_party/lingbot-video` |
 | PF_Wan | `pip install -r envs/pf_wan.txt` (Python 3.11, PyTorch 2.7.1, CUDA 12.8, FlashAttn 2.8.3) |
 | HunyuanVideo 1.5 | `pip install -r third_party/HunyuanVideo-1.5/requirements.txt` + matching flash-attn wheel |
