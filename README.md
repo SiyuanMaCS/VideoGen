@@ -15,12 +15,12 @@ Isolated, self-contained inference codebase for embodied-video generation benchm
 | Unified local | Wan2.2 TI2V-5B | `scripts_inference/run_wan22.sh` | ✅ |
 | Unified local | Cosmos-Predict2.5 | `scripts_inference/run_cosmos.sh` | ✅ |
 | Unified local | Cosmos3 (framework) | `scripts_inference/run_cosmos3.sh` | ✅ |
-| Unified local | CogVideoX | `scripts_inference/run_cogvideo.sh` | ✅ |
-| Unified local | WoW | `scripts_inference/run_wow.sh` | ✅ |
-| Unified local | GigaWorld | `scripts_inference/run_gigaworld.sh` | ✅ |
+| Unified local | CogVideoX | `scripts_inference/run_cogvideo.sh` | |
+| Unified local | WoW | `scripts_inference/run_wow.sh` | |
+| Unified local | GigaWorld | `scripts_inference/run_gigaworld.sh` |  |
 | Unified local | HunyuanVideo 1.5 | `scripts_inference/run_hunyuan.sh` | ✅ |
 | Unified local | LongCat-Video | `scripts_inference/run_longcat.sh` | ✅ |
-| Unified local | SVD-xt | `scripts_inference/run_svd.sh` | ✅ |
+| Unified local | SVD-xt | `scripts_inference/run_svd.sh` |  |
 | Standalone | Cosmos3 (Diffusers) | `scripts_inference/run_cosmos3_diffusers.py` | ✅ |
 | Native distributed | LingBot-Video (FSDP) | `scripts_inference/lingbot/` | ✅ |
 | Native distributed | PF_Wan (torchrun) | `scripts_inference/pf_wan/` | ✅ |
